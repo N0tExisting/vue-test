@@ -7,10 +7,9 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import { minifyHtml } from 'vite-plugin-html';
 import Icons from 'unplugin-icons/vite';
 import { envConfig } from 'vite-plugin-env-config';
-import Pages, {
-	type ImportMode,
-	type ImportModeResolveFn,
-} from 'vite-plugin-pages';
+import Pages from 'vite-plugin-pages';
+import type { ImportMode, ImportModeResolveFn } from 'vite-plugin-pages';
+import Inspect from 'vite-plugin-inspect';
 
 let shown = false;
 const importMode: ImportModeResolveFn = (path) => {
@@ -55,6 +54,7 @@ export default defineConfig({
 			processConditionalComments: true,
 			useShortDoctype: false,
 		}),
+		Inspect({ enabled: false }),
 	],
 	resolve: {
 		dedupe: [

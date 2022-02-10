@@ -46,6 +46,7 @@
 		"vite": "^2.7.13",
 		"vite-plugin-env-config": "^1.0.0",
 		"vite-plugin-html": "2",
+		"vite-plugin-inspect": "^0.3.14",
 		"vite-plugin-pages": "^0.20.2",
 		"vite-plugin-windicss": "^1.7.0",
 		"vite-tsconfig-paths": "^3.4.0",
