@@ -1,0 +1,30 @@
+# Logs
+logs
+*.log
+npm-*.log*
+yarn-*.log*
+yarn-*.log*
+.pnpm-*.log*
+lerna-*.log*
+
+# Build output & deps
+node_modules/
+/dist/
+dist-ssr/
+
+# .env
+.env.local
+.env.*.local
+!/.env.example.local
+
+# Tests
+/coverage/
+/cypress/videos/
+/cypress/screenshots/
+
+# Editor directories and files
+.idea/
+
+# misc
+.DS_Store
+/.dccache

@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+	"johnsoncodehk.volar",
+	"johnsoncodehk.vscode-typescript-vue-plugin",
+	"vguegan.aquilon",
+	"formulahendry.auto-close-tag",
+	"formulahendry.auto-rename-tag",
+	"streetsidesoftware.code-spell-checker",
+	"editorconfig.editorconfig",
+	"henry-li.vscode-import-formatter",
+	"dbaeumer.vscode-eslint",
+	"tombonnike.vscode-status-bar-format-toggle",
+	"antfu.iconify",
+	"mrmlnc.vscode-attrs-sorter",
+	"gruntfuggly.todo-tree",
+	"wayou.vscode-todo-highlight",
+	"voorjaar.windicss-intellisense"
+],
+  "unwantedRecommendations": [
+    "octref.vetur",
+  ],
+}

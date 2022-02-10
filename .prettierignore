@@ -1,0 +1,6 @@
+/node_modules/
+/dist/
+/coverage/
+
+# Prettier messes up the comments
+/tsconfig.json
