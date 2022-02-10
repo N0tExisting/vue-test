@@ -10,6 +10,9 @@ import pluginInteraction from '@windicss/plugin-interaction-variants';
 import pluginQuestionMark from '@windicss/plugin-question-mark';
 
 export default defineConfig({
+	attributify: {
+		prefix: 's:',
+	},
 	darkMode: 'class',
 	extract: {
 		include: [
