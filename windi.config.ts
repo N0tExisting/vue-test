@@ -10,9 +10,9 @@ import pluginInteraction from '@windicss/plugin-interaction-variants';
 import pluginQuestionMark from '@windicss/plugin-question-mark';
 
 export default defineConfig({
-	attributify: {
+	/*attributify: {
 		prefix: 's:',
-	},
+	},*/
 	darkMode: 'class',
 	extract: {
 		include: [
@@ -23,7 +23,44 @@ export default defineConfig({
 		],
 	},
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				sans: [
+					'Inter',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'Segoe UI',
+					'Roboto',
+					'Oxygen',
+					'Ubuntu',
+					'Cantarell',
+					'Fira Sans',
+					'Droid Sans',
+					'Helvetica Neue',
+					'sans-serif',
+				],
+			},
+			/*colors: {
+				main: {
+					white: '#ffffff',
+					'white-soft': '#f8f8f8',
+					'white-mute': '#f2f2f2',
+					black: '#181818',
+					'black-soft': '#222222',
+					'black-mute': '#282828',
+					indigo: '#2c3e50',
+					'div-light-1': 'rgba(60, 60, 60, 0.29)',
+					'div-light-2': 'rgba(60, 60, 60, 0.12)',
+					'div-dark-1': 'rgba(84, 84, 84, 0.65)',
+					'div-dark-2': 'rgba(84, 84, 84, 0.48)',
+					'text-light-2': 'rgba(60, 60, 60, 0.66)',
+					'text-dark-2': 'rgba(235, 235, 235, 0.64)',
+				},
+			},*/
+		},
+	},
+	variants: {
+		scrollbar: ['rounded', 'dark'],
 	},
 	plugins: [
 		plugin(({ addUtilities, addDynamic, variants }) => {
