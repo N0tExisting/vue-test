@@ -13,6 +13,7 @@ specifiers:
   '@vue/tsconfig': ^0.1.3
   '@vueuse/core': ^7.6.1
   '@vueuse/head': ^0.7.5
+  '@vueuse/motion': ^2.0.0-beta.9
   '@vueuse/router': ^7.6.1
   '@windicss/plugin-interaction-variants': ^1.0.0
   '@windicss/plugin-question-mark': ^0.1.1
@@ -43,6 +44,7 @@ specifiers:
 dependencies:
   '@vueuse/core': 7.6.1_vue@3.2.30
   '@vueuse/head': 0.7.5_vue@3.2.30
+  '@vueuse/motion': 2.0.0-beta.9_vue@3.2.30
   '@vueuse/router': 7.6.1_vue-router@4.0.12+vue@3.2.30
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.30
   tslib: 2.3.1
@@ -1046,6 +1048,21 @@ packages:
       vue: '>=3'
     dependencies:
       vue: 3.2.30
+    dev: false
+
+  /@vueuse/motion/2.0.0-beta.9_vue@3.2.30:
+    resolution: {integrity: sha512-S61glJRkYCqLJA9oPM+jdAWXM/ZFnRi6UZJ0TpxDUhRuA+ri0G5hwwmcy4y78wvX6gkDUGQFFGELz1xBEwrZww==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.1
+      vue: ^2.0.0 || >=3.0.0-rc.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      '@vueuse/core': 7.6.1_vue@3.2.30
+      popmotion: 11.0.3
+      vue: 3.2.30
+      vue-demi: 0.12.1_vue@3.2.30
     dev: false
 
   /@vueuse/router/7.6.1_vue-router@4.0.12+vue@3.2.30:
@@ -2522,6 +2539,12 @@ packages:
       mime-types: 2.1.34
     dev: true
 
+  /framesync/6.0.1:
+    resolution: {integrity: sha512-fUY88kXvGiIItgNC7wcTOl0SNRCVXMKSWW2Yzfmn7EKNc+MpCzcz9DhdHcdjbrtN3c6R4H5dTY2jiCpPdysEjA==}
+    dependencies:
+      tslib: 2.3.1
+    dev: false
+
   /from/0.1.7:
     resolution: {integrity: sha1-g8YK/Fi5xWmXAH7Rp2izqzA6RP4=}
     dev: true
@@ -2723,6 +2746,10 @@ packages:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
     dev: true
+
+  /hey-listen/1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
+    dev: false
 
   /html-encoding-sniffer/3.0.0:
     resolution: {integrity: sha512-oWv4T4yJ52iKrufjnyZPkrN0CH3QnrUqdB6In1g5Fe1mia8GmF36gnfNySxoZtxD5+NmYw1EElVXiBk93UeskA==}
@@ -3621,6 +3648,15 @@ packages:
       vue-demi: 0.12.1_vue@3.2.30
     dev: false
 
+  /popmotion/11.0.3:
+    resolution: {integrity: sha512-Y55FLdj3UxkR7Vl3s7Qr4e9m0onSnP8W7d/xQLsoJM40vs6UKHFdygs6SWryasTZYqugMjm3BepCF4CWXDiHgA==}
+    dependencies:
+      framesync: 6.0.1
+      hey-listen: 1.0.8
+      style-value-types: 5.0.0
+      tslib: 2.3.1
+    dev: false
+
   /postcss/8.4.6:
     resolution: {integrity: sha512-OovjwIzs9Te46vlEx7+uXB0PLijpwjXGKXjVGGPIGubGpq7uh5Xgf6D6FiJ/SzJMBosHDp6a2hiXOS97iBXcaA==}
     engines: {node: ^10 || ^12 || >=14}
@@ -4086,6 +4122,13 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
     dev: true
+
+  /style-value-types/5.0.0:
+    resolution: {integrity: sha512-08yq36Ikn4kx4YU6RD7jWEv27v4V+PUsOGa4n/as8Et3CuODMJQ00ENeAVXAeydX4Z2j1XHZF1K2sX4mGl18fA==}
+    dependencies:
+      hey-listen: 1.0.8
+      tslib: 2.3.1
+    dev: false
 
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}

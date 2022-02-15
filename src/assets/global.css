@@ -1,0 +1,22 @@
+/* TODO: Styles like:
+ * https://github.com/N0tExisting/vite-react-boilerplate
+ * https://github.com/N0tExisting/solid-ts-boilerplate
+ * https://github.com/N0tExisting/solid-pokedex
+ */
+
+html,
+body,
+#root,
+#app {
+	transition: color 0.5s, background-color 0.5s;
+	text-rendering: optimizeLegibility;
+	@apply w-screen h-screen antialiased overflow-hidden bg-gray-100 text-gray-700 dark:(text-gray-100 bg-gray-700);
+}
+
+html {
+	color-scheme: light;
+}
+
+html.dark {
+	color-scheme: dark;
+}
