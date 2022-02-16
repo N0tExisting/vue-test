@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
-import HelloWorld from '$comp/HelloWorld.vue';
+import AboutPage from '$route/about.vue';
 
-describe('HelloWorld', () => {
+describe('About Page', () => {
 	it('renders properly', () => {
-		const wrapper = mount(HelloWorld, { props: { msg: 'Hello Vitest' } });
-		expect(wrapper.text()).toContain('Hello Vitest');
+		const wrapper = mount(AboutPage);
+		expect(wrapper.text()).toContain('About this Website');
 	});
 });
