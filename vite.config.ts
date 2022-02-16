@@ -4,7 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import WindiCSS from 'vite-plugin-windicss';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import { minifyHtml } from 'vite-plugin-html';
+import { createHtmlPlugin } from 'vite-plugin-html';
 import Icons from 'unplugin-icons/vite';
 import { envConfig } from 'vite-plugin-env-config';
 import Pages from 'vite-plugin-pages';
@@ -43,16 +43,19 @@ export default defineConfig({
 		Icons({
 			compiler: 'vue3',
 		}),
-		minifyHtml({
-			collapseWhitespace: true,
-			removeComments: true,
-			decodeEntities: true,
-			minifyCSS: true,
-			minifyJS: true,
-			removeAttributeQuotes: false,
-			removeEmptyAttributes: true,
-			processConditionalComments: true,
-			useShortDoctype: false,
+		createHtmlPlugin({
+			minify: {
+				collapseWhitespace: true,
+				removeComments: true,
+				decodeEntities: true,
+				minifyCSS: true,
+				minifyJS: true,
+				removeAttributeQuotes: false,
+				removeEmptyAttributes: true,
+				processConditionalComments: true,
+				useShortDoctype: false,
+			},
+			entry: undefined,
 		}),
 		Inspect({ enabled: false }),
 	],
