@@ -38,6 +38,9 @@
 			<NavItem>
 				<RouterLink to="/about">About</RouterLink>
 			</NavItem>
+			<NavItem>
+				<RouterLink to="/counter">Counter</RouterLink>
+			</NavItem>
 			<li class="ml-auto py-2 pl-4 flex items-center">
 				<DarkToggle />
 			</li>

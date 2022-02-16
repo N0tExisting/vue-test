@@ -10,7 +10,7 @@ body,
 #app {
 	transition: color 0.5s, background-color 0.5s;
 	text-rendering: optimizeLegibility;
-	@apply w-screen h-screen antialiased overflow-hidden bg-gray-100 text-gray-700 dark:(text-gray-100 bg-gray-700);
+	@apply antialiased w-screen h-screen overflow-hidden bg-gray-100 text-gray-700 dark:(text-gray-100 bg-gray-700);
 }
 
 html {

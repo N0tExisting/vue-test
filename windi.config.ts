@@ -22,6 +22,9 @@ export default defineConfig({
 			'./src/**/*.{css,scss,pcss,postcss}',
 		],
 	},
+	alias: {
+		btn: 'rounded px-1 m-1 transition ease-in-out duration-500 hover:(scale-110)',
+	},
 	theme: {
 		extend: {
 			fontFamily: {
@@ -40,23 +43,6 @@ export default defineConfig({
 					'sans-serif',
 				],
 			},
-			/*colors: {
-				main: {
-					white: '#ffffff',
-					'white-soft': '#f8f8f8',
-					'white-mute': '#f2f2f2',
-					black: '#181818',
-					'black-soft': '#222222',
-					'black-mute': '#282828',
-					indigo: '#2c3e50',
-					'div-light-1': 'rgba(60, 60, 60, 0.29)',
-					'div-light-2': 'rgba(60, 60, 60, 0.12)',
-					'div-dark-1': 'rgba(84, 84, 84, 0.65)',
-					'div-dark-2': 'rgba(84, 84, 84, 0.48)',
-					'text-light-2': 'rgba(60, 60, 60, 0.66)',
-					'text-dark-2': 'rgba(235, 235, 235, 0.64)',
-				},
-			},*/
 		},
 	},
 	variants: {
