@@ -10,6 +10,7 @@
 		"test:ui": "vitest --ui",
 		"e2e": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress open'",
 		"e2e:ci": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress run'",
+		"wait": "start-server-and-test preview http://127.0.0.1:5050/ ",
 		"type-check": "vue-tsc --noEmit",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --report-unused-disable-directives --ignore-path .gitignore",
 		"lint:check": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --report-unused-disable-directives --ignore-path .gitignore",
