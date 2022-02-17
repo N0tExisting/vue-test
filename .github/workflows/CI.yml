@@ -145,18 +145,18 @@ jobs:
       - name: Setup Chrome
         # You may pin to the exact commit or the version.
         uses: browser-actions/setup-chrome@v0.0.0
-        if: ${{ matrix.browser }} == 'chrome'
+        if: ${{ matrix.browser == 'chrome' }}
         #with:
         #  # The Chromium version to install and use.
         #  chromium-version: # optional
 
       - name: Setup Firefox
         uses: browser-actions/setup-firefox@v0.0.0
-        if: ${{ matrix.browser }} == firefox
+        if: ${{ matrix.browser == 'firefox' }}
 
       - name: Setup Firefox-ESR
         uses: browser-actions/setup-firefox@v0.0.0
-        if: ${{ matrix.browser }} == firefox-esr
+        if: ${{ matrix.browser == 'firefox-esr' }}
         with:
           # The Firefox version to install and use. Examples: 84.0, 84.0.1, latest-esr
           firefox-version: latest-esr
