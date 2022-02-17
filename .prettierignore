@@ -1,6 +1,7 @@
 /node_modules/
 /dist/
 /coverage/
+/analysis/
 
 # Prettier messes up the comments
 /tsconfig.json
