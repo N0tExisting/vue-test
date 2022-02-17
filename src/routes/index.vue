@@ -15,7 +15,8 @@
 </script>
 
 <template>
-	<main class="h-full flex flex-col place-content-center place-items-center text-lg">
+	<main
+		class="h-full flex flex-col place-content-center place-items-center text-lg">
 		<!-- TODO: Animate Logo
 			(Up & down while squishing)?
 		-->
