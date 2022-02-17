@@ -175,7 +175,7 @@ jobs:
           install: false
           start: pnpm preview
           wait-on: 'http://localhost:5050'
-          wait-on-timeout: 120
+          wait-on-timeout: 60
           browser: ${{ matrix.browser }}
           record: true
           # TODO: When e2e takes to long, start parallelizing
