@@ -161,7 +161,7 @@ jobs:
           # The Firefox version to install and use. Examples: 84.0, 84.0.1, latest-esr
           firefox-version: latest-esr
 
-      - name: Download the build folders
+      - name: Download Build Folder
         uses: actions/download-artifact@v2
         with:
           name: website
@@ -173,7 +173,7 @@ jobs:
         with:
           # we have already installed all dependencies above
           install: false
-          start: pnpm preview
+          start: pnpm preview -- --host
           wait-on: 'http://127.0.0.1:5050'
           wait-on-timeout: 60
           browser: ${{ matrix.browser }}
