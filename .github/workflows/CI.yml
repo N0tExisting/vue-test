@@ -74,6 +74,7 @@ jobs:
     env:
       node-version: 16.x
     strategy:
+      max-parallel: 2
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -115,13 +116,13 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        browser: [chrome, firefox, firefox-esr]
+        #containers: [1, 2, 3]
+        #os: [ubuntu-latest, windows-latest]
       fail-fast: false
       #max-parallel: 0
 
-    runs-on: ${{ matrix.os }}
-
-    if: false
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -141,14 +142,57 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Setup Chrome
+        # You may pin to the exact commit or the version.
+        uses: browser-actions/setup-chrome@v0.0.0
+        if: ${{ matrix.browser }} == 'chrome'
+        #with:
+        #  # The Chromium version to install and use.
+        #  chromium-version: # optional
+
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@v0.0.0
+        if: ${{ matrix.browser }} == firefox
+
+      - name: Setup Firefox-ESR
+        uses: browser-actions/setup-firefox@v0.0.0
+        if: ${{ matrix.browser }} == firefox-esr
+        with:
+          # The Firefox version to install and use. Examples: 84.0, 84.0.1, latest-esr
+          firefox-version: latest-esr
+
       - name: Download the build folders
         uses: actions/download-artifact@v2
         with:
           name: website
           path: build
 
-      - name: Run e2e tests
-        run: pnpm run e2e:ci
+      - name: 'E2E Tests - ${{ matrix.browser }}'
+        # https://github.com/marketplace/actions/cypress-io
+        uses: cypress-io/github-action@v2
+        with:
+          # we have already installed all dependencies above
+          install: false
+          start: pnpm preview
+          wait-on: 'http://localhost:5050'
+          wait-on-timeout: 120
+          browser: ${{ matrix.browser }}
+          record: true
+          # TODO: When e2e takes to long, start parallelizing
+          parallel: false
+          tag: ${{ github.event_name }}
+          group: 'E2E - ${{ matrix.browser }}'
+          #spec: cypress/tests/ui/*
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # - if the event is push, the title will be undefined
+          # and Cypress will get the commit message from Git information
+          # - if the event is pull_request, then we set the commit
+          # message to the pull request title
+          COMMIT_INFO_MESSAGE: ${{ github.event.pull_request.title }}
 
       - name: Upload Videos
         uses: actions/upload-artifact@v2.2.4
