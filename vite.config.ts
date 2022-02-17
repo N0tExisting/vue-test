@@ -95,7 +95,7 @@ export default defineConfig({
 				'text-summary',
 				'lcov',
 				'json',
-				'html',
+				//'html',
 				'clover',
 				'cobertura',
 			],
