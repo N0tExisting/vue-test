@@ -10,7 +10,11 @@
 		"e2e:ci": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress run --record'",
 		"type-check": "vue-tsc --noEmit",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --report-unused-disable-directives --ignore-path .gitignore",
-		"lint:check": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --report-unused-disable-directives --ignore-path .gitignore"
+		"lint:check": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --report-unused-disable-directives --ignore-path .gitignore",
+		"analysis": "windicss-analysis",
+		"analysis:build": "pnpm analysis:html && pnpm analysis:json",
+		"analysis:html": "windicss-analysis --html analysis",
+		"analysis:json": "windicss-analysis --json analysis/report.json"
 	},
 	"dependencies": {
 		"@vueuse/core": "^7.6.2",
@@ -52,9 +56,10 @@
 		"vite-plugin-html": "^3.0.6",
 		"vite-plugin-inspect": "^0.3.14",
 		"vite-plugin-pages": "^0.20.2",
-		"vite-plugin-windicss": "^1.7.0",
+		"vite-plugin-windicss": "^1.7.1",
 		"vite-tsconfig-paths": "^3.4.0",
 		"vitest": "^0.3.6",
-		"vue-tsc": "^0.31.4"
+		"vue-tsc": "^0.31.4",
+		"windicss-analysis": "^0.3.5"
 	}
 }

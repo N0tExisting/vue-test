@@ -11,6 +11,7 @@ lerna-*.log*
 node_modules/
 /dist/
 dist-ssr/
+/analysis/
 
 # .env
 .env.local
