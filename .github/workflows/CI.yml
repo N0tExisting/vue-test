@@ -1,0 +1,254 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ^6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --lockfile-only
+
+  build:
+    needs: [install]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ^6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Upload Build Output
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: Website # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: ./dist/
+
+  test:
+    needs: [install]
+    strategy:
+      fail-fast: false
+      matrix:
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [16.x]
+        os:
+          - ubuntu-latest
+          #- windows-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ^6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test
+        #env:
+        #  COLLECT_COVERAGE: true
+        run: pnpm test
+
+      - name: Upload Coverage
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: Coverage
+          # A file, directory or wildcard pattern that describes what to upload
+          path: ./coverage/
+
+  e2e:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: false
+    #concurrency: 20
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ^6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v2
+        with:
+          name: Website
+          path: build
+
+      - name: Run e2e tests
+        run: pnpm run e2e:ci
+
+      - name: Upload Videos
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: Videos
+          # A file, directory or wildcard pattern that describes what to upload
+          path: ./cypress/videos/
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: Screenshots
+          # A file, directory or wildcard pattern that describes what to upload
+          path: ./cypress/screenshots/
+
+  tsc:
+    needs: [install]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+
+    # FIXME: For some reason i get an error that 'incremental mode is not yet supported'
+    if: false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ^6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+  lint:
+    needs: [install]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ^6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint:check
+
+  analysis:
+    needs: [install]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+
+    if: false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ^6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Analyze
+        run: pnpm run analysis:build
+
+      - name: Upload analysis result
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: Style-Analysis # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: ./analysis/

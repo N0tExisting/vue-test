@@ -87,11 +87,9 @@ export default defineConfig({
 		include: ['**/tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,vue}'],
 		reporters: 'verbose',
 		coverage: {
-			// TODO: Coverage
-			enabled: false,
+			enabled: true,
 			reportsDirectory: 'coverage',
 			skipFull: false,
-			include: ['src/**/*.{js,jsx,ts,tsx,vue}'],
 			reporter: [
 				'text',
 				'text-summary',
@@ -101,6 +99,14 @@ export default defineConfig({
 				'clover',
 				'cobertura',
 			],
+			clean: true,
+			// TODO: Do we emit full coverage during watch?
+			//cleanOnRerun: true,
+			all: true,
+			excludeNodeModules: true,
+			allowExternal: false,
+			include: ['src/**/*.{js,jsx,ts,tsx,vue}'],
+			exclude: ['dist/**/*', 'cypress/**/*', 'coverage/**/*', 'analysis/**/*'],
 			extension: [
 				'.js',
 				'.mjs',
