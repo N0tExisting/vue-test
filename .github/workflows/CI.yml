@@ -5,9 +5,12 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   install:
     runs-on: ubuntu-latest
+    env:
+      # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+      node-version: 16.x
     strategy:
-      matrix:
-        node-version: [16]
+      #matrix:
+      #  os: [ubuntu-latest]
 
     steps:
       - name: Checkout code
@@ -18,10 +21,10 @@ jobs:
         with:
           version: ^6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -30,9 +33,12 @@ jobs:
   build:
     needs: [install]
     runs-on: ubuntu-latest
+    env:
+      node-version: 16.x
     strategy:
-      matrix:
-        node-version: [16]
+      fail-fast: false
+      #matrix:
+      #  os: [ubuntu-latest]
 
     steps:
       - name: Checkout code
@@ -43,10 +49,10 @@ jobs:
         with:
           version: ^6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -65,14 +71,12 @@ jobs:
 
   test:
     needs: [install]
+    env:
+      node-version: 16.x
     strategy:
       fail-fast: false
       matrix:
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        node-version: [16.x]
-        os:
-          - ubuntu-latest
-          #- windows-latest
+        os: [ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -85,18 +89,16 @@ jobs:
         with:
           version: ^6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Test
-        #env:
-        #  COLLECT_COVERAGE: true
         run: pnpm test
 
       - name: Upload Coverage
@@ -111,10 +113,13 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     if: false
-    #concurrency: 20
+    env:
+      node-version: 16.x
     strategy:
       matrix:
-        node-version: [16]
+        os: [ubuntu-latest, windows-latest]
+      fail-fast: false
+      #max-parallel: 0
 
     steps:
       - name: Checkout code
@@ -125,10 +130,10 @@ jobs:
         with:
           version: ^6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -162,9 +167,12 @@ jobs:
   tsc:
     needs: [install]
     runs-on: ubuntu-latest
+    env:
+      node-version: 16.x
     strategy:
-      matrix:
-        node-version: [16]
+      fail-fast: false
+      #matrix:
+      #  os: [ubuntu-latest]
 
     # FIXME: For some reason i get an error that 'incremental mode is not yet supported'
     if: false
@@ -178,10 +186,10 @@ jobs:
         with:
           version: ^6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -190,9 +198,12 @@ jobs:
   lint:
     needs: [install]
     runs-on: ubuntu-latest
+    env:
+      node-version: 16.x
     strategy:
-      matrix:
-        node-version: [16]
+      fail-fast: false
+      #matrix:
+      #  os: [ubuntu-latest]
 
     steps:
       - name: Checkout code
@@ -203,10 +214,10 @@ jobs:
         with:
           version: ^6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.#node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -218,9 +229,12 @@ jobs:
   analysis:
     needs: [install]
     runs-on: ubuntu-latest
+    env:
+      node-version: 16.x
     strategy:
-      matrix:
-        node-version: [16]
+      fail-fast: false
+      #matrix:
+      #  os: [ubuntu-latest]
 
     if: false
 
@@ -233,10 +247,10 @@ jobs:
         with:
           version: ^6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies
