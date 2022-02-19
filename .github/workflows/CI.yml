@@ -201,12 +201,21 @@ jobs:
 
       - name: Upload Videos
         uses: actions/upload-artifact@v2.2.4
+        if: always()
         with:
           name: videos
           path: ./cypress/videos/
 
+      - name: Upload Downloads
+        uses: actions/upload-artifact@v2.2.4
+        if: always()
+        with:
+          name: downloads
+          path: ./cypress/downloads/
+
       - name: Upload Screenshots
         uses: actions/upload-artifact@v2.2.4
+        if: always()
         with:
           name: screenshots
           path: ./cypress/screenshots/

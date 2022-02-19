@@ -20,8 +20,10 @@ dist-ssr/
 
 # Tests
 /coverage/
+
 /cypress/videos/
 /cypress/screenshots/
+/cypress/downloads/
 
 # Editor directories and files
 .idea/
