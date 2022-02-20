@@ -1,9 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import {
+	createRouter,
+	type RouterHistory,
+	type RouterOptions,
+} from 'vue-router';
 import routes from '~pages';
 
-const router = createRouter({
-	history: createWebHistory(import.meta.env.BASE_URL),
-	routes: routes,
-});
-
-export default router;
+export default function CreateRouter(
+	History: RouterHistory,
+	opts: Omit<RouterOptions, 'history' | 'routes'> = {},
+) {
+	return createRouter({
+		history: History,
+		routes: routes,
+		...opts,
+	});
+}
