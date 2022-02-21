@@ -5,9 +5,11 @@ import {
 } from 'vue-router';
 import routes from '~pages';
 
+export type MiniRouterOpts = Omit<RouterOptions, 'history' | 'routes'>;
+
 export default function CreateRouter(
 	History: RouterHistory,
-	opts: Omit<RouterOptions, 'history' | 'routes'> = {},
+	opts: MiniRouterOpts = {},
 ) {
 	return createRouter({
 		history: History,
