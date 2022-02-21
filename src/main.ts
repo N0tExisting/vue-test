@@ -3,16 +3,21 @@ import { createPinia } from 'pinia';
 import { createWebHistory } from 'vue-router';
 import { createHead } from '@vueuse/head';
 import { MotionPlugin } from '@vueuse/motion';
-import router from '$util/router';
+import createRouter from '$util/router';
 import App from '$App.vue';
 import '$asset/global.css';
 import 'windi.css';
 
-const app = createApp(App);
+export const app = createApp(App);
+export const pinia = createPinia();
+export const head = createHead();
+export const router = createRouter(createWebHistory(import.meta.env.BASE_URL));
 
 app.use(MotionPlugin);
-app.use(createPinia());
-app.use(createHead());
-app.use(router(createWebHistory(import.meta.env.BASE_URL)));
+app.use(pinia);
+app.use(head);
+app.use(router);
 
-app.mount('#app');
+await router.isReady();
+
+export const instance = app.mount('#app');
