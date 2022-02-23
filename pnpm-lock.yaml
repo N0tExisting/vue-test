@@ -26,6 +26,7 @@ specifiers:
   eslint-plugin-vue: ^8.4.1
   jsdom: ^19.0.0
   pinia: ^2.0.11
+  pinia-plugin-persistedstate: ^1.2.2
   prettier: ^2.5.1
   start-server-and-test: ^1.14.0
   tslib: ^2.3.1
@@ -50,6 +51,7 @@ dependencies:
   '@vueuse/motion': 2.0.0-beta.9_vue@3.2.31
   '@vueuse/router': 7.6.2_vue-router@4.0.12+vue@3.2.31
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
+  pinia-plugin-persistedstate: 1.2.2_pinia@2.0.11
   tslib: 2.3.1
   vue: 3.2.31
   vue-router: 4.0.12_vue@3.2.31
@@ -3878,6 +3880,14 @@ packages:
     resolution: {integrity: sha1-7RQaasBDqEnqWISY59yosVMw6Qw=}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /pinia-plugin-persistedstate/1.2.2_pinia@2.0.11:
+    resolution: {integrity: sha512-qm/fYlkA0p7E3spL0bjSxxl2nm3szGNsIGKlWAbHddMvR48prWi7qYmtmVFIERCpbdCYVSmq5AvGIrGbWzkVzw==}
+    peerDependencies:
+      pinia: ^2.0.0
+    dependencies:
+      pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
+    dev: false
 
   /pinia/2.0.11_typescript@4.5.5+vue@3.2.31:
     resolution: {integrity: sha512-JzcmnMqu28PNWOjDgEDK6fTrIzX8eQZKPPKvu/fpHdpXARUj1xeVdFi3YFIMOWswqaBd589cpmAMdSSTryI9iw==}
