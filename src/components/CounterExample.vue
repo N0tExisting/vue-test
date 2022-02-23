@@ -33,7 +33,7 @@
 				@click="counter.decrement()">
 				-1
 			</button>
-			<!-- TODO: Custom thing for Reset Button-->
+			<!-- TODO: Custom thing for Reset Button -->
 			<button
 				class="*btn text-gray-100 bg-fuchsia-700 hover:bg-fuchsia-600"
 				@click="counter.$reset()">
