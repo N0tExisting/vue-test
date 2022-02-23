@@ -20,6 +20,4 @@ app.use(pinia);
 app.use(head);
 app.use(router);
 
-await router.isReady();
-
-export const instance = app.mount('#app');
+export const instance = router.isReady().then(() => app.mount('#app'));
