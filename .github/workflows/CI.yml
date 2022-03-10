@@ -178,10 +178,10 @@ jobs:
         with:
           # we have already installed all dependencies above
           install: false
-          #start: pnpm preview -- --host
-          #wait-on: 'http://localhost:5050'
-          #wait-on-timeout: 60
-          command: pnpm wait -- cypress run
+          start: pnpm preview -- --host
+          wait-on: 'http-get://localhost:5050'
+          wait-on-timeout: 60
+          #command: pnpm wait -- cypress run
           browser: ${{ matrix.browser }}
           record: true
           # TODO: When e2e takes to long, start parallelizing
