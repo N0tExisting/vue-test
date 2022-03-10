@@ -181,7 +181,7 @@ jobs:
           #start: pnpm preview -- --host
           #wait-on: 'http://localhost:5050'
           #wait-on-timeout: 60
-          run: pnpm wait -- cypress run
+          command: pnpm wait -- cypress run
           browser: ${{ matrix.browser }}
           record: true
           # TODO: When e2e takes to long, start parallelizing
