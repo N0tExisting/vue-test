@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-// <reference types="vitest" />
+import vavite from 'vavite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import WindiCSS from 'vite-plugin-windicss';
 import vue from '@vitejs/plugin-vue';
@@ -11,17 +11,19 @@ import Pages from 'vite-plugin-pages';
 import type { ImportMode, ImportModeResolveFn } from 'vite-plugin-pages';
 import Inspect from 'vite-plugin-inspect';
 
-let shown = false;
-const importMode: ImportModeResolveFn = (path) => {
-	let retVal: ImportMode = 'async';
-	// /\/src\/routes\/\[\.\.\.\]\.([jt]sx?|vue)$/;
-	if (path.endsWith('/src/routes/[...].vue')) {
-		retVal = 'sync';
-	}
-	console.log(`${shown ? '' : '\n'}Importing '${path}' ${retVal}hronously`);
-	shown = true;
-	return retVal;
-};
+const importMode = ((): ImportModeResolveFn => {
+	let shown = false;
+	return (path) => {
+		let retVal: ImportMode = 'async';
+		// /\/src\/routes\/\[\.\.\.\]\.([jt]sx?|vue)$/;
+		if (path.endsWith('/src/routes/[...].vue')) {
+			retVal = 'sync';
+		}
+		console.log(`${shown ? '' : '\n'}Importing '${path}' ${retVal}hronously`);
+		shown = true;
+		return retVal;
+	};
+})();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -31,6 +33,12 @@ export default defineConfig({
 		tsconfigPaths({ loose: true }),
 		vue(),
 		vueJsx(),
+		vavite({
+			serverEntry: './src/server/index.ts',
+			clientAssetsDir: 'dist/client',
+			serveClientAssetsInDev: true,
+			//reloadOn
+		}),
 		WindiCSS(),
 		Pages({
 			extensions: ['vue', 'jsx', 'tsx', 'md', 'mdx'],
@@ -72,6 +80,34 @@ export default defineConfig({
 			'pinia',
 		],
 	},
+	buildSteps: [
+		{
+			name: 'client',
+			config: {
+				build: {
+					target: 'es6',
+					outDir: 'dist/client',
+					sourcemap: 'hidden',
+					rollupOptions: {
+						// Client entry
+						input: './src/main.ts',
+					},
+				},
+			},
+		},
+		{
+			name: 'server',
+			config: {
+				build: {
+					// Server entry
+					sourcemap: true,
+					target: 'es7',
+					ssr: './src/server/index.ts',
+					outDir: 'dist/server',
+				},
+			},
+		},
+	],
 	build: {
 		target: 'es6',
 		polyfillDynamicImport: false,

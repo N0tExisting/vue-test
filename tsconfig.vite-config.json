@@ -2,7 +2,7 @@
 	"extends": "./node_modules/@vue/tsconfig/tsconfig.node.json",
 	"compilerOptions": {
 		"composite": true,
-		"types": ["node", "vitest"]
+		"types": ["node", "vitest", "@vavite/multibuild/vite-config"]
 	},
 	"include": ["*.config.*", "windi.d.ts"]
 }
