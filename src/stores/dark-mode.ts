@@ -53,6 +53,9 @@ const useDarkMode = defineStore({
 			return this.set(getWindowDarkMode());
 		},
 	},
+	persist: {
+		key: 'pinia-theme',
+	},
 });
 
 export default useDarkMode;
