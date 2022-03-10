@@ -125,7 +125,7 @@ jobs:
       #max-parallel: 0
 
     # FIXME: For some reason it doesn't realize that the server is running
-    if: false
+    #if: false
 
     runs-on: ubuntu-latest
 
