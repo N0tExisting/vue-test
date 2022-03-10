@@ -14,7 +14,8 @@
 	"mrmlnc.vscode-attrs-sorter",
 	"gruntfuggly.todo-tree",
 	"wayou.vscode-todo-highlight",
-	"voorjaar.windicss-intellisense"
+	"voorjaar.windicss-intellisense",
+	"VisualStudioExptTeam.vscodeintellicode"
 ],
   "unwantedRecommendations": [
     "octref.vetur",
