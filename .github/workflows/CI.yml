@@ -174,12 +174,12 @@ jobs:
 
       - name: 'E2E Tests - ${{ matrix.browser }}'
         # https://github.com/marketplace/actions/cypress-io
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v3
         with:
           # we have already installed all dependencies above
           install: false
           start: pnpm preview -- --host
-          wait-on: http://127.0.0.1:5050
+          wait-on: http://localhost:5050
           wait-on-timeout: 60
           browser: ${{ matrix.browser }}
           record: true
