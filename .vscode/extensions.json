@@ -15,7 +15,8 @@
 	"gruntfuggly.todo-tree",
 	"wayou.vscode-todo-highlight",
 	"voorjaar.windicss-intellisense",
-	"VisualStudioExptTeam.vscodeintellicode"
+	"visualstudioexptteam.vscodeintellicode",
+	"ZixuanChen.vitest-explorer"
 ],
   "unwantedRecommendations": [
     "octref.vetur",

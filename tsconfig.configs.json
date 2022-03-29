@@ -4,5 +4,5 @@
 		"composite": true,
 		"types": ["node", "vitest", "@vavite/multibuild/vite-config"]
 	},
-	"include": ["*.config.*", "windi.d.ts"]
+	"include": ["*.config.*", "config-env.d.ts"]
 }

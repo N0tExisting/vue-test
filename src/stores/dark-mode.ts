@@ -55,6 +55,7 @@ const useDarkMode = defineStore({
 	},
 	persist: {
 		key: 'pinia-theme',
+		paths: ['mode'],
 	},
 });
 
