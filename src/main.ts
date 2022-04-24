@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createSSRApp } from 'vue';
 import { createPinia } from 'pinia';
 import PiniaPersist from 'pinia-plugin-persistedstate';
 import { createWebHistory } from 'vue-router';
@@ -9,14 +9,16 @@ import App from '$App.vue';
 import '$asset/global.css';
 import 'windi.css';
 
-export const app = createApp(App);
+export const app = createSSRApp(App);
 export const head = createHead();
 export const router = createRouter(createWebHistory(import.meta.env.BASE_URL));
 export const pinia = createPinia();
+
+pinia.state.value = window[Symbol.for('SSR.Initial')].pinia;
 pinia.use(PiniaPersist);
 
-app.use(MotionPlugin);
 app.use(pinia);
+app.use(MotionPlugin);
 app.use(head);
 app.use(router);
 

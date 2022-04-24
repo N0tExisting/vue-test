@@ -2,6 +2,7 @@
 	"extends": "./node_modules/@vue/tsconfig/tsconfig.node.json",
 	"compilerOptions": {
 		"composite": true,
+		"moduleResolution": "node",
 		"types": ["node", "vitest", "@vavite/multibuild/vite-config"]
 	},
 	"include": ["*.config.*", "config-env.d.ts"]

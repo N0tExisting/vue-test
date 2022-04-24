@@ -1,17 +1,17 @@
 import { defineConfig } from 'vite';
+import { builtinModules } from 'node:module';
 import vavite from 'vavite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import WindiCSS from 'vite-plugin-windicss';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import { createHtmlPlugin } from 'vite-plugin-html';
 import Icons from 'unplugin-icons/vite';
 import { envConfig } from 'vite-plugin-env-config';
 import Pages from 'vite-plugin-pages';
-import type { ImportMode, ImportModeResolveFn } from 'vite-plugin-pages';
+import type { ImportMode, ImportModeResolver } from 'vite-plugin-pages';
 import Inspect from 'vite-plugin-inspect';
 
-const importMode = ((): ImportModeResolveFn => {
+const importMode = ((): ImportModeResolver => {
 	let shown = false;
 	return (path) => {
 		let retVal: ImportMode = 'async';
@@ -36,8 +36,8 @@ export default defineConfig({
 		vavite({
 			serverEntry: './src/server/index.ts',
 			clientAssetsDir: 'dist/client',
-			serveClientAssetsInDev: true,
-			//reloadOn
+			//serveClientAssetsInDev: true,
+			reloadOn: 'static-deps-change',
 		}),
 		WindiCSS(),
 		Pages({
@@ -46,24 +46,23 @@ export default defineConfig({
 			syncIndex: false,
 			resolver: 'vue',
 			importMode,
+			exclude: ['src/routes/api/**/*'],
 		}),
+		// TODO: Api
+		/*Pages({
+			// prettier-ignore
+			dirs: [{
+					dir: 'src/routes/api',
+					baseRoute: '/api',
+			}],
+			resolver: 'react',
+			importMode: 'sync',
+			extensions: ['ts', 'tsx', 'js', 'jsx'],
+			//extendRoute
+		}),*/
 		envConfig(),
 		Icons({
 			compiler: 'vue3',
-		}),
-		createHtmlPlugin({
-			minify: {
-				collapseWhitespace: true,
-				removeComments: true,
-				decodeEntities: true,
-				minifyCSS: true,
-				minifyJS: true,
-				removeAttributeQuotes: false,
-				removeEmptyAttributes: true,
-				processConditionalComments: true,
-				useShortDoctype: false,
-			},
-			entry: undefined,
 		}),
 		Inspect({ enabled: false }),
 	],
@@ -74,9 +73,6 @@ export default defineConfig({
 			'@vue/runtime-dom',
 			'@vue/runtime-core',
 			'@vue/server-renderer',
-			//'@vue/compiler-core',
-			//'@vue/compiler-sfc',
-			//'@vue/compiler-dom',
 			'pinia',
 		],
 	},
@@ -108,6 +104,11 @@ export default defineConfig({
 			},
 		},
 	],
+	ssr: {
+		external: [...builtinModules],
+		//noExternal: false,
+		target: 'node',
+	},
 	build: {
 		target: 'es6',
 		polyfillDynamicImport: false,
@@ -143,17 +144,7 @@ export default defineConfig({
 			allowExternal: false,
 			include: ['src/**/*.{js,jsx,ts,tsx,vue}'],
 			exclude: ['dist/**/*', 'cypress/**/*', 'coverage/**/*', 'analysis/**/*'],
-			extension: [
-				'.js',
-				'.mjs',
-				'cjs',
-				'.jsx',
-				'.ts',
-				'.mts',
-				'.cts',
-				'.tsx',
-				'.vue',
-			],
+			extension: ['.cjs', '.mjs', '.js', '.jsx', '.vue', '.tsx', '.ts'],
 		},
 	},
 });
